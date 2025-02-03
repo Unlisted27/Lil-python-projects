@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+import sys
+import os
+
 license = '''
 author: Unlisted_dev
-contact: unlisted_games27 on discord
+contact: unlisted_dev on discord
 Copyright <2024> <Unlisted_dev>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
@@ -18,16 +21,10 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FO
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
-print("makex version [1.1.2]")
+version = "[1.2.6]"
+print("makex version:" + version)
 import sys
 import os
-if len(sys.argv) <= 1:
-    sys.exit("makex: No arguments provided, use makex --help for more information")
-sys.path[0]
-#help
-#print(sys.argv)
-if len(sys.argv) >= 2:
-    file = sys.argv[1]
 destination = "/usr/bin"
 def makex(file,destination):
     name = file.split("/")[-1]
@@ -41,14 +38,19 @@ def makex(file,destination):
     else:
         return(True)
 def helpdialogue():
-    print("USAGE: makex [FILE]")
-    print("Example: sudo makex /home/username/python/game")
     print("makex: makes a python file runable from terminal")
+    print("USAGE: makex [FILE]")
+    print("Example: sudo makex /home/username/python/game.py")
+    print("Having trouble? For more info, run makex --info")
+    print("License: makex --license")
+def infodialogue():
+    print("First time running? Use makex makex.py for easier access in the future")
     print("--IMPORTANT--")
     print("Your python file must have a shebang line.")
     print("A shebang line instructs the program how to run your file")
     print("Add a shebang line such as #!/usr/bin/env python3 on line 1 of your code")
     print("--NOTES--")
+    print("-Only tested on linux debian, should only work on linux debian")
     print("-This script will not replace the original file")
     print("-The \"executable\" will still be a python file")
     print("-Any changes made to the original file will need to be updated to the")
@@ -56,10 +58,26 @@ def helpdialogue():
     print("-The executable will be placed in /usr/bin")
     print("-Having errors? run with sudo")
     print("")
+def licensedialogue():
     print(license)
     sys.exit()
+
+
+if len(sys.argv) <= 1:
+    sys.exit("makex: No arguments provided, use makex --help for more information")
+sys.path[0]
+#help
+#print(sys.argv)
+if len(sys.argv) >= 2:
+    file = sys.argv[1]
 if file == "--help":
     helpdialogue()
+elif file == "--info":
+    infodialogue()
+elif file == "--license":
+    licensedialogue()
+elif file == "--version":
+    print("Makex version: "+version)
 else:
     result = makex(file,destination)
     if not result:
