@@ -22,11 +22,11 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
 version = "[1.2.6]"
-print("makex version:" + version)
+print("makepyx version:" + version)
 import sys
 import os
 destination = "/usr/bin"
-def makex(file,destination):
+def makepyx(file,destination):
     name = file.split("/")[-1]
     name = str(name)
     os.system("cp "+file+" "+destination)
@@ -38,13 +38,13 @@ def makex(file,destination):
     else:
         return(True)
 def helpdialogue():
-    print("makex: makes a python file runable from terminal")
-    print("USAGE: makex [FILE]")
-    print("Example: sudo makex /home/username/python/game.py")
-    print("Having trouble? For more info, run makex --info")
-    print("License: makex --license")
+    print("makepyx: makes a python file runable from terminal")
+    print("USAGE: makepyx [FILE]")
+    print("Example: sudo makepyx /home/username/python/game.py")
+    print("Having trouble? For more info, run makepyx --info")
+    print("License: makepyx --license")
 def infodialogue():
-    print("First time running? Use makex makex.py for easier access in the future")
+    print("First time running? Use makepyx makepyx.py for easier access in the future")
     print("--IMPORTANT--")
     print("Your python file must have a shebang line.")
     print("A shebang line instructs the program how to run your file")
@@ -54,7 +54,7 @@ def infodialogue():
     print("-This script will not replace the original file")
     print("-The \"executable\" will still be a python file")
     print("-Any changes made to the original file will need to be updated to the")
-    print("\"executable\" by running makex again")
+    print("\"executable\" by running makepyx again")
     print("-The executable will be placed in /usr/bin")
     print("-Having errors? run with sudo")
     print("")
@@ -64,7 +64,7 @@ def licensedialogue():
 
 
 if len(sys.argv) <= 1:
-    sys.exit("makex: No arguments provided, use makex --help for more information")
+    sys.exit("makepyx: No arguments provided, use makepyx --help for more information")
 sys.path[0]
 #help
 #print(sys.argv)
@@ -77,12 +77,12 @@ elif file == "--info":
 elif file == "--license":
     licensedialogue()
 elif file == "--version":
-    print("Makex version: "+version)
+    print("makepyx version: "+version)
 else:
-    result = makex(file,destination)
+    result = makepyx(file,destination)
     if not result:
         print("CHECKING CURRENT DIRECTORY")
-        result = makex(sys.path[0]+"/"+file,destination)
+        result = makepyx(sys.path[0]+"/"+file,destination)
         if not result:
             sys.exit("ERROR! PERMISSION DENIED OR NO FILE EXISTS")
     if result:
